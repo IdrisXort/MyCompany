@@ -21,7 +21,10 @@ namespace MyCompany2.Controllers
         // GET: Cars
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cars.ToListAsync());
+            return View(await _context.Cars
+                .Include(a=>a.User)
+                .Include(b=>b.Company)
+                .ToListAsync());
         }
 
         // GET: Cars/Details/5
@@ -33,6 +36,8 @@ namespace MyCompany2.Controllers
             }
 
             var car = await _context.Cars
+                .Include(a=>a.Company)
+                .Include(b=>b.User)
                 .FirstOrDefaultAsync(m => m.CarId == id);
             if (car == null)
             {
