@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyCompany2.Domein;
+using MyCompany2.Models;
 
 namespace MyCompany2.Controllers
 {
@@ -21,10 +22,9 @@ namespace MyCompany2.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Gebruikers
-                .Include(a=>a.Cars)
-                .ToListAsync());
+            return View(await _context.Users.ToListAsync());
         }
+
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -33,8 +33,7 @@ namespace MyCompany2.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Gebruikers
-                 .Include(a => a.Cars)
+            var user = await _context.Users
                 .FirstOrDefaultAsync(m => m.UserId == id);
             if (user == null)
             {
@@ -55,7 +54,7 @@ namespace MyCompany2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserId,FirstName,LastName")] User user)
+        public async Task<IActionResult> Create([Bind("UserId,UserName,Email,PhoneNumber,Age,FirstName,LastName,LastActivation")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -74,7 +73,7 @@ namespace MyCompany2.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Gebruikers.FindAsync(id);
+            var user = await _context.Users.FindAsync(id);
             if (user == null)
             {
                 return NotFound();
@@ -87,7 +86,7 @@ namespace MyCompany2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserId,FirstName,LastName")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("UserId,UserName,Email,PhoneNumber,Age,FirstName,LastName,LastActivation")] User user)
         {
             if (id != user.UserId)
             {
@@ -125,7 +124,7 @@ namespace MyCompany2.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Gebruikers
+            var user = await _context.Users
                 .FirstOrDefaultAsync(m => m.UserId == id);
             if (user == null)
             {
@@ -140,15 +139,15 @@ namespace MyCompany2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.Gebruikers.FindAsync(id);
-            _context.Gebruikers.Remove(user);
+            var user = await _context.Users.FindAsync(id);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UserExists(int id)
         {
-            return _context.Gebruikers.Any(e => e.UserId == id);
+            return _context.Users.Any(e => e.UserId == id);
         }
     }
 }

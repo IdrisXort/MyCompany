@@ -10,23 +10,22 @@ using MyCompany2.Models;
 
 namespace MyCompany2.Controllers
 {
-    public class CarsController : Controller
+    public class SkillsController : Controller
     {
         private readonly MyCompanyDbContext _context;
 
-        public CarsController(MyCompanyDbContext context)
+        public SkillsController(MyCompanyDbContext context)
         {
             _context = context;
         }
 
-        // GET: Cars
+        // GET: Skills
         public async Task<IActionResult> Index()
         {
-            var myCompanyDbContext = _context.Cars.Include(c => c.Company).Include(c => c.User);
-            return View(await myCompanyDbContext.ToListAsync());
+            return View(await _context.Skills.ToListAsync());
         }
 
-        // GET: Cars/Details/5
+        // GET: Skills/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,45 +33,39 @@ namespace MyCompany2.Controllers
                 return NotFound();
             }
 
-            var car = await _context.Cars
-                .Include(c => c.Company)
-                .Include(c => c.User)
-                .FirstOrDefaultAsync(m => m.CarId == id);
-            if (car == null)
+            var skill = await _context.Skills
+                .FirstOrDefaultAsync(m => m.SkillId == id);
+            if (skill == null)
             {
                 return NotFound();
             }
 
-            return View(car);
+            return View(skill);
         }
 
-        // GET: Cars/Create
+        // GET: Skills/Create
         public IActionResult Create()
         {
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "CompanyId", "CompanyId");
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId");
             return View();
         }
 
-        // POST: Cars/Create
+        // POST: Skills/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CarId,Make,Model,Description,UserId,Range,Mileage,CompanyId")] Car car)
+        public async Task<IActionResult> Create([Bind("SkillId,Name,Description")] Skill skill)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(car);
+                _context.Add(skill);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "CompanyId", "CompanyId", car.CompanyId);
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", car.UserId);
-            return View(car);
+            return View(skill);
         }
 
-        // GET: Cars/Edit/5
+        // GET: Skills/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,24 +73,22 @@ namespace MyCompany2.Controllers
                 return NotFound();
             }
 
-            var car = await _context.Cars.FindAsync(id);
-            if (car == null)
+            var skill = await _context.Skills.FindAsync(id);
+            if (skill == null)
             {
                 return NotFound();
             }
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "CompanyId", "CompanyId", car.CompanyId);
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", car.UserId);
-            return View(car);
+            return View(skill);
         }
 
-        // POST: Cars/Edit/5
+        // POST: Skills/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CarId,Make,Model,Description,UserId,Range,Mileage,CompanyId")] Car car)
+        public async Task<IActionResult> Edit(int id, [Bind("SkillId,Name,Description")] Skill skill)
         {
-            if (id != car.CarId)
+            if (id != skill.SkillId)
             {
                 return NotFound();
             }
@@ -106,12 +97,12 @@ namespace MyCompany2.Controllers
             {
                 try
                 {
-                    _context.Update(car);
+                    _context.Update(skill);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CarExists(car.CarId))
+                    if (!SkillExists(skill.SkillId))
                     {
                         return NotFound();
                     }
@@ -122,12 +113,10 @@ namespace MyCompany2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CompanyId"] = new SelectList(_context.Companies, "CompanyId", "CompanyId", car.CompanyId);
-            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "UserId", car.UserId);
-            return View(car);
+            return View(skill);
         }
 
-        // GET: Cars/Delete/5
+        // GET: Skills/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,32 +124,30 @@ namespace MyCompany2.Controllers
                 return NotFound();
             }
 
-            var car = await _context.Cars
-                .Include(c => c.Company)
-                .Include(c => c.User)
-                .FirstOrDefaultAsync(m => m.CarId == id);
-            if (car == null)
+            var skill = await _context.Skills
+                .FirstOrDefaultAsync(m => m.SkillId == id);
+            if (skill == null)
             {
                 return NotFound();
             }
 
-            return View(car);
+            return View(skill);
         }
 
-        // POST: Cars/Delete/5
+        // POST: Skills/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var car = await _context.Cars.FindAsync(id);
-            _context.Cars.Remove(car);
+            var skill = await _context.Skills.FindAsync(id);
+            _context.Skills.Remove(skill);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CarExists(int id)
+        private bool SkillExists(int id)
         {
-            return _context.Cars.Any(e => e.CarId == id);
+            return _context.Skills.Any(e => e.SkillId == id);
         }
     }
 }

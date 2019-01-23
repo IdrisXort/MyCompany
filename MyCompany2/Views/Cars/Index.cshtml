@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MyCompany2.Domein.Car>
+﻿@model IEnumerable<MyCompany2.Models.Car>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,16 +13,25 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CarName)
+                @Html.DisplayNameFor(model => model.Make)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CarModel)
+                @Html.DisplayNameFor(model => model.Model)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Company)
+                @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Range)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mileage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Company)
             </th>
             <th></th>
         </tr>
@@ -31,16 +40,25 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.CarName)
+                @Html.DisplayFor(modelItem => item.Make)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CarModel)
+                @Html.DisplayFor(modelItem => item.Model)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Company.CompanyName)
+                @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.FirstName)
+                @Html.DisplayFor(modelItem => item.User.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Range)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mileage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company.CompanyId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CarId">Edit</a> |

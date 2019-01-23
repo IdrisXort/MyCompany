@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MyCompany2.Domein.User>
+﻿@model IEnumerable<MyCompany2.Models.User>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,13 +13,25 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cars)
+                @Html.DisplayNameFor(model => model.LastActivation)
             </th>
             <th></th>
         </tr>
@@ -28,26 +40,25 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
-                @if (item.Cars.Count > 0)
-                {
-                    @foreach (var car in item.Cars)
-                    {
-
-                        <span>@car.CarName</span>
-                        <span>@car.CarModel.ToString()</span>
-
-                        <br />
-                    }
-                }
-                @if (item.Cars.Count == 0)
-                {<span>There are no cars assigned to @item.FirstName </span>
-            }
+                @Html.DisplayFor(modelItem => item.LastActivation)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |

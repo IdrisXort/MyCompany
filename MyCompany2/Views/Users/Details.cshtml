@@ -1,4 +1,4 @@
-﻿@model MyCompany2.Domein.User
+﻿@model MyCompany2.Models.User
 
 @{
     ViewData["Title"] = "Details";
@@ -11,38 +11,47 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.FirstName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Cars)
-        </dt>
-        <dd>
-            @if (Model.Cars.Count > 0)
-            {
-                @foreach (var car in Model.Cars)
-                {
-
-                    <span>@car.CarName</span>
-                    <span>@car.CarModel.ToString()</span>
-
-                    <br />
-                }
-            }
-            @if(Model.Cars.Count == 0) {<span>There are no cars assigned to @Model.FirstName </span>
-            }
-        </dd>
-
-
-        <dt>
             @Html.DisplayNameFor(model => model.LastName)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.LastName)
         </dd>
-
+        <dt>
+            @Html.DisplayNameFor(model => model.LastActivation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastActivation)
+        </dd>
     </dl>
 </div>
 <div>

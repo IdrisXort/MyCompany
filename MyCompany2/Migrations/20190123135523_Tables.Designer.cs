@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyCompany2.Domein;
 
 namespace MyCompany2.Migrations
 {
     [DbContext(typeof(MyCompanyDbContext))]
-    partial class MyCompanyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190123135523_Tables")]
+    partial class Tables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
