@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MyCompany2.Domein;
+using MyCompany2.Models;
 
 namespace MyCompany2.Controllers
 {
@@ -21,9 +22,7 @@ namespace MyCompany2.Controllers
         // GET: Companies
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Companies
-                .Include(a=>a.Cars)
-                .ToListAsync());
+            return View(await _context.Companies.ToListAsync());
         }
 
         // GET: Companies/Details/5
@@ -35,7 +34,6 @@ namespace MyCompany2.Controllers
             }
 
             var company = await _context.Companies
-                .Include(a=>a.Cars)
                 .FirstOrDefaultAsync(m => m.CompanyId == id);
             if (company == null)
             {
@@ -56,7 +54,7 @@ namespace MyCompany2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CompanyId,CompanyName")] Company company)
+        public async Task<IActionResult> Create([Bind("CompanyId,Name,Description,Mission,Strategy,Vision,WebSite")] Company company)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +86,7 @@ namespace MyCompany2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CompanyId,CompanyName")] Company company)
+        public async Task<IActionResult> Edit(int id, [Bind("CompanyId,Name,Description,Mission,Strategy,Vision,WebSite")] Company company)
         {
             if (id != company.CompanyId)
             {

@@ -1,4 +1,4 @@
-﻿@model MyCompany2.Domein.Car
+﻿@model MyCompany2.Models.Car
 
 @{
     ViewData["Title"] = "Details";
@@ -11,28 +11,46 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.CarName)
+            @Html.DisplayNameFor(model => model.Make)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CarName)
+            @Html.DisplayFor(model => model.Make)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.CarModel)
+            @Html.DisplayNameFor(model => model.Model)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CarModel)
+            @Html.DisplayFor(model => model.Model)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Company)
+            @Html.DisplayNameFor(model => model.Description)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Company.CompanyName)
+            @Html.DisplayFor(model => model.Description)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.User)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.User.FirstName)
+            @Html.DisplayFor(model => model.User.UserId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Range)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Range)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Mileage)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Mileage)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Company)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Company.CompanyId)
         </dd>
     </dl>
 </div>

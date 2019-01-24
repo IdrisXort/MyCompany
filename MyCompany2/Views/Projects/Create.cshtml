@@ -1,4 +1,4 @@
-﻿@model MyCompany2.Models.Company
+﻿@model MyCompany2.Models.Project
 
 @{
     ViewData["Title"] = "Create";
@@ -6,12 +6,17 @@
 
 <h2>Create</h2>
 
-<h4>Company</h4>
+<h4>Project</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EProjectType" class="control-label"></label>
+                <select asp-for="EProjectType" class="form-control" asp-items="ViewBag.Project"></select>
+                <span asp-validation-for="EProjectType" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -23,24 +28,19 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Mission" class="control-label"></label>
-                <input asp-for="Mission" class="form-control" />
-                <span asp-validation-for="Mission" class="text-danger"></span>
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Strategy" class="control-label"></label>
-                <input asp-for="Strategy" class="form-control" />
-                <span asp-validation-for="Strategy" class="text-danger"></span>
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Vision" class="control-label"></label>
-                <input asp-for="Vision" class="form-control" />
-                <span asp-validation-for="Vision" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="WebSite" class="control-label"></label>
-                <input asp-for="WebSite" class="form-control" />
-                <span asp-validation-for="WebSite" class="text-danger"></span>
+                <label asp-for="EndDate" class="control-label"></label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
